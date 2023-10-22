@@ -15,5 +15,7 @@
 	<h3>Email id : ${user.useremail }</h3>
 	<h3>Name : ${user.username }</h3>
 	<h3>Password : ${user.password }</h3>
+	
+	${msg }
 </body>
 </html>
