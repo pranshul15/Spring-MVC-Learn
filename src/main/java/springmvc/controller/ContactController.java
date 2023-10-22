@@ -2,18 +2,54 @@ package springmvc.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.RequestParam;
+
+import springmvc.model.User;
 
 @Controller
 public class ContactController {
 	
+	@ModelAttribute
+	public void commonDataForModel(Model m) { 
+		// this can be used for common addition directly
+		// so we don't need to add everything directly
+		m.addAttribute("Header", "Learning Spring MVC");
+		m.addAttribute("Desc", "This is tutorial of Code with Durgesh");
+	}
+	
 	@RequestMapping("/contact")
-	public String showForm() {
+	public String showForm(Model m) {
 		return "contact";
 	}
 	
+	@RequestMapping(path = "/processform", method = RequestMethod.POST)
+	public String getForm(
+			@ModelAttribute User user,Model model) {
+		return "success";
+	}
+	
+	/*
+	public String getForm(
+			@RequestParam("useremail") String userEmail,
+			@RequestParam("username") String userName, 
+			@RequestParam("password") String password,
+			Model model) {
+		
+		User user = new User();
+		user.setUseremail(userEmail);
+		user.setUsername(userName);
+		user.setPassword(password);
+		
+		model.addAttribute("user", user);
+		
+		return "success";
+	}
+	*/
+	
+	/*
 	@RequestMapping(path = "/processform", method = RequestMethod.POST)
 	public String getForm(
 			@RequestParam("useremail") String userEmail,
@@ -29,4 +65,5 @@ public class ContactController {
 		model.addAttribute("password", password);
 		return "success";
 	}
+	*/
 }
